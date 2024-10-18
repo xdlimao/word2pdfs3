@@ -1,0 +1,20 @@
+{
+  "name": "word2pdfajonsift",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm i && npx tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.7.6",
+    "@types/node-fetch": "^2.6.11",
+    "fastify": "^5.0.0",
+    "libreoffice-convert": "^1.6.0",
+    "nodejs-file-downloader": "^4.13.0",
+    "typescript": "^5.6.3"
+  }
+}
