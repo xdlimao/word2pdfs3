@@ -1,3 +1,11 @@
 export function findNameByS3(url:string):string{
-    return url.split("files/")[1];
+    
+
+    const regex = /files\/(.*?)\.docx/;
+    const result = url.match(regex);
+
+    if(result)
+        return result[1]; // Saída: nomeDoArquivo
+    
+    return ''
 }

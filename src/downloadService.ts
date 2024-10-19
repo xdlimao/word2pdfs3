@@ -6,10 +6,10 @@ export async function download(url:string){
         directory: "./temp"
     });
     try {
-        console.log('Baixando conteúdo')
-        const {filePath,downloadStatus} = await downloader.download();
-        console.log('Baixado')
+        console.log('Baixando conteúdo...')
+        await downloader.download();
+        console.log('Baixado!')
     } catch (error) {
-        console.log("Download failed", error);
+        console.log("Download falhou", error);
     }
 }

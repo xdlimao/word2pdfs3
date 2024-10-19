@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify"
-import { convert, readPdfBinary} from './msofficeService'
+import { cleanTemp, convert, readPdfBinary} from './msofficeService'
 import { download } from './downloadService'
 import { findNameByS3 } from './util'
 
@@ -11,7 +11,8 @@ async function controllers(fastify: FastifyInstance){
     fastify.post<{ Body: defaultBody }>('/send', async (request, reply) => {
         
         //Pega o nome 
-        let archivename = findNameByS3(request.body.url)
+        let archivename = findNameByS3(request.body.url);
+        console.log("Nome do arquivo: " + archivename);
         
         //Baixa o arquivo
         await download(request.body.url);
@@ -24,6 +25,9 @@ async function controllers(fastify: FastifyInstance){
 
         //Agora é só fazer a lógica de enviar para o S3
         //...
+
+        //Apagar arquivos para economizar espaço
+        cleanTemp(archivename);
   })
 }
 

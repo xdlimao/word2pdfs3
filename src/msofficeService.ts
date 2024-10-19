@@ -14,9 +14,9 @@ export function convert(name:string){
 
     const command = path.join(__dirname, `../bin/docto.exe -f ${inputFile} -O ${outputFile} -T wdFormatPDF`);
 
+    console.log("Convertendo!")
     const processo = spawn(command, {shell:true})
-
-    //LOG do Spawn: 
+    //LOG do Spawn:
     //   processo.stdout.on('data', (data) => {
     //     console.log(data);
     //   });
@@ -32,13 +32,16 @@ export function convert(name:string){
 
 export async function readPdfBinary(name:string):Promise<Buffer>{
     const filePath:string = path.join(__dirname, `../temp/${name}.pdf`);
+    
+    await new Promise(resolve => setTimeout(resolve, 10000)); //Não consegui criar uma lógica de verificar se o arquivo existe xd.
+    
     return await fs.promises.readFile(filePath)
 }
 
 
-export async function cleanTemp(name:string):Promise<void> {
+export function cleanTemp(name:string):void {
     const inputFile:string = path.join(__dirname, `../temp/${name}.docx`);
     const outputFile:string = path.join(__dirname, `../temp/${name}.pdf`);
-    await fs.unlink(inputFile,()=>{})
-    await fs.unlink(outputFile, ()=>{})
+    fs.unlink(inputFile,()=>{})
+    fs.unlink(outputFile, ()=>{})
 }

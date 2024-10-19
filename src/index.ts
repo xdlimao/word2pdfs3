@@ -2,7 +2,7 @@ import Fastify from 'fastify'
 import controller from './controller'
 
 const fastify = Fastify({
-    logger: true
+    logger: false
 })
 
 fastify.register(controller)
